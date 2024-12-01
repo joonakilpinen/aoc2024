@@ -1,0 +1,12 @@
+---
+templates:
+  - "configmap.yaml"
+tests:
+  - it: Day 1 part 2 solution should be 31
+    documentSelector:
+      path: metadata.name
+      value: aoc-results
+    asserts:
+      - equal:
+          path: data.day1-test-part2
+          value: 31

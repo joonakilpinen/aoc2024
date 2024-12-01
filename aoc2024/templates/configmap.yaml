@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: aoc-results
+data:
+  {{- range $path, $bytes := $.Files.Glob "inputs/*" }}
+  {{- $name := base $path }}
+  {{ printf "%s: %s" (printf "%s-part1" $name) (include (printf "aoc2024.%spart1" ($name | replace "-test" "")) ($.Files.Get $path)) }}
+  {{ printf "%s: %s" (printf "%s-part2" $name) (include (printf "aoc2024.%spart2" ($name | replace "-test" "")) ($.Files.Get $path)) }}
+  {{- end }}
